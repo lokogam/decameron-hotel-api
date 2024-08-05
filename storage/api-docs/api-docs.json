@@ -1,0 +1,779 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Decameron API Documentation",
+        "description": "This is the API documentation for the Decameron application.",
+        "contact": {
+            "email": "support@decameron.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Authenticate a user and create a session",
+                "operationId": "42f77e072dec84b0e1094cca1228298e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Authentication successful, session created"
+                    },
+                    "401": {
+                        "description": "Unauthorized, invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid credentials"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Destroy an authenticated session",
+                "operationId": "03afb12b342c2ea43bdc1de4f39e91a8",
+                "responses": {
+                    "204": {
+                        "description": "Session destroyed successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized, user not logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/password/reset": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Reset the user's password",
+                "operationId": "850b2d0eca53252fc21c8b7014c160c4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "abcdef1234567890"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "newpassword123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "newpassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password reset successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Password reset successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity, validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "The provided password reset token is invalid."
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a new user",
+                "operationId": "573de1fed352c1205a32c4d1b9877375",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "User registered successfully"
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hotels": {
+            "get": {
+                "tags": [
+                    "Hotels"
+                ],
+                "summary": "List all hotels",
+                "operationId": "1f059609a9a7cdebad01e8494549cc8d",
+                "responses": {
+                    "200": {
+                        "description": "A list of hotels",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Hotel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Hotels"
+                ],
+                "summary": "Create a new hotel",
+                "operationId": "c8f412836761802038a38f7c95ad6c9e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HotelRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created hotel",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hotel"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hotels/{id}": {
+            "get": {
+                "tags": [
+                    "Hotels"
+                ],
+                "summary": "Get a specific hotel",
+                "operationId": "32fa458e73403c0f53352a6162667196",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the hotel",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the specified hotel",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hotel"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Hotels"
+                ],
+                "summary": "Update an existing hotel",
+                "operationId": "05f1700e0699e62ac666298252adb116",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the hotel",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HotelRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The updated hotel",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hotel"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Hotels"
+                ],
+                "summary": "Delete a hotel",
+                "operationId": "d7cc9d4ced4fee467530e2b4017bc6c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the hotel",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Hotel deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hotel not found"
+                    }
+                }
+            }
+        },
+        "/api/rooms": {
+            "get": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "List all rooms",
+                "operationId": "bea681612754126f01807ff95647eb34",
+                "responses": {
+                    "200": {
+                        "description": "A list of rooms",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Room"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Create a new room",
+                "operationId": "cd6c1029f22e2425a1f99cf83e27383a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RoomRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The created room",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Room"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rooms/{id}": {
+            "get": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Get a specific room",
+                "operationId": "91a59d880bb0297e8321dd75af8f506b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the room",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the specified room",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Room"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Room not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Update an existing room",
+                "operationId": "c489811fdd25dfe273cf9a5bc3b5d386",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the room",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RoomRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The updated room",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Room"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Room not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Rooms"
+                ],
+                "summary": "Delete a room",
+                "operationId": "61024891be80949c0aaa6e4536381225",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the room",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Room deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Room deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Room not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Hotel": {
+                "required": [
+                    "name",
+                    "address",
+                    "city",
+                    "nit",
+                    "total_rooms"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "nit": {
+                        "type": "string"
+                    },
+                    "total_rooms": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "rooms": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Room"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "HotelRequest": {
+                "required": [
+                    "name",
+                    "address",
+                    "city",
+                    "nit",
+                    "total_rooms"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Hotel Paradise"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Beach Road"
+                    },
+                    "city": {
+                        "type": "string",
+                        "example": "Miami"
+                    },
+                    "nit": {
+                        "type": "string",
+                        "example": "1234567890"
+                    },
+                    "total_rooms": {
+                        "type": "integer",
+                        "example": 50
+                    }
+                },
+                "type": "object"
+            },
+            "Room": {
+                "required": [
+                    "hotel_id",
+                    "room_type",
+                    "accommodation",
+                    "quantity"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "hotel_id": {
+                        "type": "integer"
+                    },
+                    "room_type": {
+                        "type": "string",
+                        "enum": [
+                            "ESTANDAR",
+                            "JUNIOR",
+                            "SUITE"
+                        ]
+                    },
+                    "accommodation": {
+                        "type": "string",
+                        "enum": [
+                            "SENCILLA",
+                            "DOBLE",
+                            "TRIPLE",
+                            "CUADRUPLE"
+                        ]
+                    },
+                    "quantity": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "hotel": {
+                        "$ref": "#/components/schemas/Hotel"
+                    }
+                },
+                "type": "object"
+            },
+            "RoomRequest": {
+                "required": [
+                    "hotel_id",
+                    "room_type",
+                    "accommodation",
+                    "quantity"
+                ],
+                "properties": {
+                    "hotel_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "room_type": {
+                        "type": "string",
+                        "enum": [
+                            "ESTANDAR",
+                            "JUNIOR",
+                            "SUITE"
+                        ],
+                        "example": "ESTANDAR"
+                    },
+                    "accommodation": {
+                        "type": "string",
+                        "enum": [
+                            "SENCILLA",
+                            "DOBLE",
+                            "TRIPLE",
+                            "CUADRUPLE"
+                        ],
+                        "example": "SENCILLA"
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "example": 5
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Hotels",
+            "description": "Operations related to hotels"
+        },
+        {
+            "name": "Rooms",
+            "description": "Operations related to rooms"
+        },
+        {
+            "name": "Authentication",
+            "description": "Authentication"
+        }
+    ]
+}

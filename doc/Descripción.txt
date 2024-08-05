@@ -1,0 +1,61 @@
+Descripción General del Proyecto
+Resumen
+El proyecto consiste en desarrollar un sistema de gestión de hoteles utilizando una arquitectura basada en API, con Laravel como backend y Vue.js como frontend. La aplicación permitirá a los usuarios gestionar información sobre hoteles y habitaciones, incluyendo la capacidad de crear, leer, actualizar y eliminar (CRUD) datos. El sistema está diseñado para ser escalable, seguro y fácil de mantener.
+
+Objetivos del Proyecto
+Gestión de Hoteles: Permitir a los usuarios agregar, editar, eliminar y visualizar información de hoteles.
+Gestión de Habitaciones: Permitir a los usuarios agregar, editar, eliminar y visualizar información sobre diferentes tipos de habitaciones en los hoteles.
+Interfaz de Usuario Intuitiva: Proveer una interfaz de usuario amigable y fácil de usar utilizando Vue.js.
+API RESTful: Proveer una API robusta y segura para interactuar con el frontend y cualquier otro cliente que requiera acceso a los datos.
+Autenticación y Autorización: Implementar un sistema de autenticación y autorización para asegurar que solo usuarios autorizados puedan realizar ciertas acciones.
+Tecnologías Utilizadas
+Frontend:
+
+Vue.js: Framework de JavaScript para construir interfaces de usuario.
+Vuex: Librería para el manejo del estado en aplicaciones Vue.js.
+Axios: Librería para realizar solicitudes HTTP desde el frontend.
+Backend:
+
+Laravel: Framework de PHP para desarrollar aplicaciones web con una arquitectura MVC.
+Laravel Sanctum: Paquete para la autenticación de API.
+Base de Datos:
+
+PostgreSQL: Sistema de gestión de bases de datos relacional.
+Componentes del Sistema
+Frontend (Vue.js):
+
+Componentes de Vue: Definen la interfaz de usuario para diferentes partes de la aplicación, como la gestión de hoteles y habitaciones.
+Vuex Store: Centraliza el estado de la aplicación, facilitando el manejo de datos compartidos entre componentes.
+Axios: Se utiliza para realizar solicitudes HTTP al backend, permitiendo la interacción con la API.
+Backend (Laravel):
+
+Controladores: Manejan las solicitudes HTTP y ejecutan la lógica de negocio correspondiente.
+Modelos: Representan las entidades de la base de datos y encapsulan la lógica de negocio.
+Rutas: Definen los endpoints de la API y asocian las rutas con los controladores adecuados.
+Middleware: Aplican filtros y validaciones a las solicitudes HTTP antes de que lleguen a los controladores.
+Base de Datos (PostgreSQL):
+
+Tablas: Estructuras de datos que almacenan la información sobre hoteles y habitaciones.
+hotels: Almacena información básica sobre los hoteles, como nombre, dirección, ciudad, NIT, y número total de habitaciones.
+rooms: Almacena información sobre los diferentes tipos de habitaciones, incluyendo el identificador del hotel al que pertenecen, tipo de habitación, acomodaciones, y cantidad de habitaciones.
+Flujo de Trabajo
+Interacción del Usuario:
+
+Los usuarios interactúan con la aplicación a través del navegador web, utilizando la interfaz de usuario proporcionada por Vue.js.
+Solicitudes HTTP:
+
+Las acciones realizadas por los usuarios (como agregar o editar un hotel) generan solicitudes HTTP que son enviadas al backend.
+Procesamiento en el Backend:
+
+Laravel recibe estas solicitudes, valida los datos, ejecuta la lógica de negocio necesaria y realiza operaciones en la base de datos PostgreSQL.
+Respuesta y Actualización del Frontend:
+
+Una vez procesada la solicitud, Laravel envía una respuesta de vuelta al frontend, que actualiza la interfaz de usuario para reflejar los cambios realizados.
+Seguridad
+Autenticación y Autorización: Se implementará utilizando Laravel Sanctum para asegurar que solo los usuarios autenticados puedan realizar ciertas acciones.
+Validación de Datos: Todas las solicitudes al backend serán validadas para asegurar que los datos sean correctos y estén en el formato esperado.
+Manejo de Errores: Se implementará un sistema robusto de manejo de errores para proporcionar retroalimentación adecuada a los usuarios y registrar errores críticos.
+Conclusión
+Este proyecto busca ofrecer una solución completa para la gestión de hoteles y habitaciones, utilizando tecnologías modernas y una arquitectura bien definida. La combinación de Laravel y Vue.js proporciona una base sólida para el desarrollo de aplicaciones web eficientes, escalables y mantenibles.
+
+
